@@ -1,0 +1,34 @@
+<div class="fullscreen-bg">
+
+  <header class="profile-header">
+    <div class="account-container" (click)="onProfileClick()">
+      <span class="material-icons">account_circle</span>
+    </div>
+
+    <div class="user-menu" *ngIf="isMenuOpen">
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombre }}</p>
+    <p class="user-email">{{ user?.correo }}</p>
+  </div>
+  <hr>
+  <button class="btn-logout" (click)="onLogout()">
+    <span class="material-icons">logout</span>
+    Cerrar sesión
+  </button>
+</div>
+  </header>
+
+  <main class="main-container">
+    <section class="content">
+      <h1 class="sour-gummy" style="font-weight: bolder;">
+        Tu mindpet te está esperando
+      </h1>
+      
+      <button class="btn-download" (click)="onDownload()">
+        <span class="material-icons">download</span>
+        Descargue aquí
+      </button>
+    </section>
+  </main>
+
+</div>

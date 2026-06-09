@@ -1,0 +1,245 @@
+/* --- Estilos Generales y Fondo (como antes) --- */
+.fullscreen-bg {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/assets/images/fondoForo1.png'); /* Reemplaza con tu imagen real */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* --- SECCIÓN DE PERFIL MEJORADA (El círculo) --- */
+.profile-header {
+  position: absolute;
+  top: 1.5rem; /* Un poco más de margen */
+  right: 2rem;
+  z-index: 20; /* Aseguramos que esté por encima de todo */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.account-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Crea un círculo sutil */
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  
+  /* Color de fondo sutil (por ejemplo, blanco muy translúcido o el verde del fondo más claro) */
+  background-color: rgba(255, 255, 255, 0.4); 
+  
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  /* Un borde muy fino para definición */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* Hover state */
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Estilos específicos para el icono dentro */
+  .material-icons { 
+    font-size: 34px; /* Un tamaño equilibrado */
+    color: #333; /* O un color más oscuro que resalte */
+    opacity: 0.9;
+  }
+}
+
+/* --- Resto de los elementos (como antes, pero con z-index) --- */
+
+.main-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  
+  .content {
+    text-align: center;
+    .title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      color: #000;
+    }
+  }
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 35px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Ajuste para el icono del botón si es necesario */
+  .material-icons {
+    font-size: 24px;
+  }
+}
+
+.pet-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  width: 280px;
+  z-index: 10;
+
+  .pet-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+  }
+
+  .account-container {
+  cursor: pointer; /* Esto pone la "manito" al pasar el mouse */
+  display: flex;
+  
+}
+}
+
+.profile-header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea el menú a la derecha, bajo el icono */
+}
+
+.user-menu {
+  position: absolute; /* Importante para que flote */
+  top: 60px; /* Ajusta según el tamaño de tu account-container */
+  right: 0;
+  background: white;
+  min-width: 200px;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  
+  /* Efecto de entrada */
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contenedor del icono y menú */
+.profile-header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.account-container {
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.user-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  min-width: 240px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-info {
+  text-align: left;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 5px 0 0 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.btn-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-logout:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-1px);
+}
+
+.btn-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}

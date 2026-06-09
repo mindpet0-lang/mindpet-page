@@ -1,0 +1,297 @@
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.divisor {
+    border-top: 3px solid #000000;
+    opacity: 1;
+    width: 40%;
+    height: 3px;
+    margin: 0 auto 15px auto;
+}
+.rowpe{
+    display: flex;
+    justify-content: center
+}
+.containerpe {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.fluidpe {
+background-color: #BDE9F5AB;    
+}
+.col-sm-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+}
+.imgpe {
+aspect-ratio: 16 / 9;
+object-fit: cover;   
+}
+
+/* Estilos footer */
+
+.footer{
+  background:#BDE9F5AB;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.footer-title{
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+
+.social-icons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.social-icons img{
+  width:24px;
+  height:24px;
+}
+
+.footer-info{
+  flex-direction: column;
+  display:flex;
+  justify-content:left;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.info-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #62C6E2;
+  border-radius: 50%;
+}
+.bi {
+  font-size: 30px;
+  margin: 10px;
+}
+/*estilos secciones sofia*/
+.descarga{
+    background-image: url(/assets/fondodes.png);
+    opacity: 0.8;
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 13 / 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.descargatext{
+    color: rgb(0, 0, 0);
+    font-size: 5vw;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(160, 158, 158, 0.7);
+    text-align: center;
+}
+
+.descargabutton{
+    background-color: #bde9f5c4;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    color: #000000;
+    font-size: 2vw;
+    font-weight: bold;
+    padding: 2px;
+    padding-right: 10px;
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+}
+
+.icono{
+  font-size: 3vw;
+  padding: 3px;
+  color: rgb(0, 0, 0);
+  text-shadow: 
+  1px 0 currentColor,
+  -1px 0 currentColor;
+}
+
+.buttonforo{
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    color: #000000;
+    font-size: 2.5vw;
+    font-weight: bold;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+}
+
+.foro{
+    background-color: #BDE9F5;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    aspect-ratio: 13 / 6;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-image: url('/assets/images/fondoforo.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.forotext{
+    color: rgb(0, 0, 0);
+    font-size: 4.5vw;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(160, 158, 158, 0.7);
+    text-align: center;
+}
+.foro1 {
+  background-color: #BDE9F5;
+  background-size: cover;
+  background-position: center;  
+  border-radius: 20px;
+  aspect-ratio: 13 / 6;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+}
+
+.profile-header {
+  position: absolute;
+  top: 14px;
+  right: 70px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea el menú a la derecha, bajo el icono */
+}
+
+  .material-icons { 
+    font-size: 34px; /* Un tamaño equilibrado */
+    color: #333; /* O un color más oscuro que resalte */
+    opacity: 0.9;
+  }
+
+  .user-menu {
+  position: absolute; /* Importante para que flote */
+  top: 60px; /* Ajusta según el tamaño de tu account-container */
+  right: 20;
+  background: white;
+  min-width: 200px;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  
+  /* Efecto de entrada */
+  animation: slideIn 0.2s ease-out;
+}
+
+.btn-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-logout:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-1px);
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+.btn-settings {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-settings:hover {
+  background: #f5f5f5;
+  border-color: #bbb;
+}

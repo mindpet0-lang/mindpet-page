@@ -1,0 +1,181 @@
+<div class="main-container" style="background-image: url(assets/images/fondo.png);  aspect-ratio: 16 / 9; background-size: cover; background-position: center;">
+
+<!--Nav bar-->
+<nav class="navbar navbar-expand-lg bg-transparent">
+  <div class="container-fluid" >
+    <a class="navbar-brand" href="#"><img src="assets/images/mindpet.png" alt="Logo" width="150" height="30" style="margin-right: 120px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" style="margin-left: 60px; font-weight: bold;">
+          <a class="nav-link" href="#inicio">Inicio</a>
+        </li>
+        <li class="nav-item" style="margin-left: 60px; font-weight: bold;">
+          <a class="nav-link" href="#quienessomos">¿ Quienes somos?</a>
+        </li>
+        <li class="nav-item" style="margin-left: 60px; font-weight: bold;">
+          <a class="nav-link" href="#descargar"> Descargar</a>
+        </li>
+        <li class="nav-item" style="margin-left: 60px; font-weight: bold;">
+          <a class="nav-link" href="#foro">Foro</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="profile-header">
+    <div class="account-container" (click)="onProfileClick()">
+      <img 
+  [src]="user?.fotoPerfil || '/assets/images/default-user.png'" 
+  class="profile-img">
+    </div>
+
+    <div class="user-menu" *ngIf="isMenuOpen">
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombre }}</p>
+    <p class="user-email">{{ user?.correo }}</p>
+  </div>
+  <hr>
+
+<button class="btn-settings" [routerLink]="['/perfil']">
+  <span class="material-icons">settings</span>
+  Ajustes
+</button>
+
+  @if(user?.correo=="Inicia sesión"){
+      <button class="btn-login" [routerLink]="['/login']">
+    <span class="material-icons">logout</span>
+    iniciar sesión
+  </button>
+  }@else{
+  <button class="btn-logout" (click)="onLogout()">
+    <span class="material-icons">logout</span>
+    Cerrar sesión
+  </button>
+  }
+</div>
+  </header>
+<h6 class="display-1 text-left mb-4 sour-gummy"  style="padding-top: 15%; padding-left: 5%; padding-right: 10%; font-weight: bold; font-size: 5vw;"><p name="title">Cuida tu mente,</p>Cuida tu mindpet</h6>
+<!--End of Nav bar-->
+  </div>
+
+  <!--que es?-->
+
+    <section id="inicio">
+        <div class="container">
+            <h2  class="mb-1 mt-5" style="font-weight: bold;">Cuida tu salud mental con ayuda de mindpet</h2>
+            <div class="row">
+                <div class="col-md-8 col-sm-7 mt-3">
+                    <p class="mt-4">Muchas personas hoy enfrentan estrés, presión y emociones que no siempre saben cómo manejar. Sin
+                        embargo, la salud mental sigue siendo un tema poco atendido, y muchas veces no se busca ayuda
+                        por miedo, falta de tiempo o dificultad para acceder a apoyo profesional. Pero lo que sientes sí
+                        importa, y tu bienestar merece atención.
+
+                    <p>Por eso creamos esta app: un espacio seguro y accesible donde puedes cuidar tu salud emocional a
+                        tu ritmo. Aquí podrás expresar cómo te sientes, aprender a gestionar tus emociones y fortalecer
+                        tus hábitos de autocuidado de forma sencilla y motivadora. </p>
+
+                    <p class="mb-4">No tienes que hacerlo solo. Descarga la app y empieza hoy a construir una relación más sana
+                        contigo mismo. </p>
+                </div>
+
+                <div class="col-md-4 col-sm-5 col-6 align-self-center" style="display: flex; align-items: center; justify-content: center;">
+                    <img src="/assets/images/nutria.gif" alt="Imagen de salud mental" class="img-fluid" style="max-height: 80%;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!--end of que es?-->
+
+
+<section id="descargar">
+    <div class="descarga" style="background-image: url('assets/images/fondodes.png');">
+        <h3 class="descargatext mb-5 sour-gummy">¡Gracias por elegir mindpet!</h3>
+        
+        <button class="descargabutton" [routerLink]="['/download']"> 
+            <i class="bi bi-download icono"></i>Descargue aquí
+        </button>
+    </div>
+</section>
+
+<section id="foro">
+    <div class="descarga" style="background-image: url('assets/images/fondoforo.png');">
+      <div class="foro1">
+         <h3 class="forotext mb-2 sour-gummy">Entra a nuestro foro aquí:</h3>
+         
+         <button class="buttonforo" [routerLink]="['/foro']">Entrar</button>
+      </div>
+    </div>
+</section>
+
+  <!--quienes somos?-->
+
+  <section id="quienessomos">
+    <div class="container-fluid fluidpe">
+  <h1 class="title pt-4">¿Quienes somos?</h1>
+  <p class="text">Somos un equipo de aprendices de análisis y desarrollo de software que elaboramos esta app para nuestro proyecto final. </p>
+  <hr class="divisor">
+  <h1 class="title">Nuestro Equipo:</h1>
+  <div class="container-fluid">
+  <div class="row rowpe">
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-4 ">
+      <img src="assets/images/laura.png"  class="imgpe rounded-circle" width="200" height="200">
+      <h3>Laura Martinez</h3>
+      <p>Desarrolladora fontend </p>
+    </div>
+    <div class="col-lg-3  col-md-3 col-sm-6 mb-4 " >
+      <img src="assets/images/juan.png"  class="imgpe rounded-circle" width="200" height="200">
+      <h3>Juan Solano</h3>
+      <p>Desarrollador frontend</p>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 mb-4 ">
+      <img src="assets/images/sarid.png"  class="imgpe rounded-circle" width="200" height="200">
+      <h3>Sarid Quiroga</h3>
+      <p>Gestionadora de datos</p>
+    </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4 ">
+      <img src="assets/images/isabella.png"  class="imgpe rounded-circle" width="200" height="200">
+      <h3 style="text-align: center;">Isabella Sanchez</h3>
+      <p>Desarrolladora backend</p>
+    </div>
+  </div>
+</div>
+  </div>
+  </section>
+  <br>
+  <!--end of quienes somos?-->
+
+
+  <footer class="footer">
+  <div class="footer-container">
+
+    <a class="navbar-brand titlem" href="#"><img src="assets/images/mindpet.png" alt="Logo" width="150" height="30"  ></a>
+
+    <div class="social-icons ">
+      <i class="bi bi-facebook circle"></i>
+      <i class="bi bi-instagram circle" ></i>
+      <i class="bi bi-twitter circle"></i>
+      <i class="bi bi-whatsapp circle"></i>
+    </div>
+
+    <div class="footer-info">
+      <div class="info-item">
+        <i class="bi bi-telephone" style="font-size: 15px;"> +57 3228476503</i>
+    </div>
+
+      <div class="info-item">
+        <i class="bi bi-envelope" style="font-size: 15px;"> mindpet0@email.com</i>
+      </div>
+
+      <div class="info-item">
+        <i class="bi bi-compass" style="font-size: 15px;"> CBA Mosquera</i>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+  <!--end of footer-->

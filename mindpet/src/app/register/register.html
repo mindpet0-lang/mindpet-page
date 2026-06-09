@@ -1,0 +1,120 @@
+<div class="container-fluid bg-mindpet">
+  <div class="main-wrapper">
+
+    <img src="assets/images/logo.png" class="imgLogo">
+
+    <h2 class="titulo-registro sour-gummy" style="font-weight: bolder;">
+      Registro
+    </h2>
+
+    <form class="formulario-registro" [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+
+      <!-- NOMBRE -->
+      <input type="text" placeholder="Nombre" class="input-mindpet" formControlName="nombre">
+
+      @if(nombre.invalid && nombre.touched){
+      <p class="error">Nombre requerido</p>
+      }
+
+
+      <!-- CORREO -->
+      <input type="email" placeholder="Correo" class="input-mindpet" formControlName="correo">
+
+      @if(correo.hasError("required") && correo.touched){
+      <p class="error">Correo requerido</p>
+      }
+
+      @else if(correo.hasError("email") && correo.touched){
+      <p class="error">Ingresa un correo válido</p>
+      }
+
+
+      <!-- CONTRASEÑA -->
+      <div class="input-container">
+        <input [type]="mostrarPassword ? 'text' : 'password'" placeholder="Contraseña" class="input-mindpet"
+          formControlName="contrasena">
+
+        <span class="toggle-password" (click)="mostrarPassword = !mostrarPassword">
+          @if(mostrarPassword){
+            <i class="bi bi-eye"></i>
+          }@else{
+            <i class="bi bi-eye-slash"></i>
+          }
+        </span>
+      </div>
+
+      <!-- ERRORES -->
+      @if(contrasena.hasError("required") && contrasena.touched){
+      <p class="error">Contraseña requerida</p>
+      }
+      @else if(contrasena.hasError("minlength") && contrasena.touched){
+      <p class="error">Debe tener mínimo 8 caracteres</p>
+      }
+      @else if(contrasena.hasError("pattern") && contrasena.touched){
+      <p class="error">Debe tener una mayúscula y un número</p>
+      }
+
+      <!-- CONFIRMAR CONTRASEÑA -->
+      <div class="input-container">
+        <input [type]="mostrarPasswordC ? 'text' : 'password'" placeholder="Confirmar contraseña" class="input-mindpet"
+          formControlName="contrasenaC">
+
+        <span class="toggle-password" (click)="mostrarPasswordC = !mostrarPasswordC">
+          @if(mostrarPasswordC){
+            <i class="bi bi-eye"></i>
+          }@else{
+            <i class="bi bi-eye-slash"></i>
+          }
+        </span>
+      </div>
+
+      @if(contrasenaC.invalid && contrasenaC.touched){
+      <p class="error">Confirmación requerida</p>
+      }
+
+      @if(registerForm.hasError('passwordMismatch') && contrasenaC.touched){
+      <p class="error">Las contraseñas no coinciden</p>
+      }
+
+
+      <!-- FECHA NACIMIENTO -->
+      <div class="fecha-container">
+        <label>Fecha de nacimiento</label>
+
+        <input type="date" class="input-mindpet" formControlName="fechaNacimiento">
+      </div>
+
+      @if(fechaNacimiento.invalid && fechaNacimiento.touched){
+      <p class="error">Fecha de nacimiento requerida</p>
+      }
+
+      @if(registerForm.hasError('menorEdad') && fechaNacimiento.touched){
+      <p class="error">Debes tener al menos 13 años</p>
+      }
+
+
+      <!-- TERMINOS -->
+      <div class="terminos">
+
+        <input type="checkbox" formControlName="terminos">
+
+        <span>Términos y condiciones</span>
+
+      </div>
+
+      @if(terminos.invalid && terminos.touched){
+      <p class="errorT">Debes aceptar los términos y condiciones</p>
+      }
+
+
+      <!-- BOTON -->
+      <button class="boton" type="submit" [disabled]="registerForm.invalid">
+
+        Registrate
+
+      </button>
+
+    </form>
+
+  </div>
+</div>

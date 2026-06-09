@@ -1,0 +1,23 @@
+<div class="container-fluid min-vh-100 d-flex align-items-start justify-content-center bg-mindpet pt-5">
+  <div class="main-wrapper text-center">
+    <img src="assets/images/logo.png" class="imgLogo" style="max-width:120px">
+    <h1 class="titulo">Bienvenido a mindpet</h1>
+    <p class="pregunta">¿Ya tienes una cuenta?</p>
+
+<div class="main-wrapper text-center">
+  <button class="boton" 
+          [routerLink]="['/login']" 
+          [queryParams]="{ returnUrl: returnUrl }">
+    Iniciar sesión
+  </button>
+
+  <div class="mt-2">
+    <a [routerLink]="['/register']" 
+       [queryParams]="{ returnUrl: returnUrl }" 
+       class="crearCuenta">
+       Crear cuenta
+    </a>
+  </div>
+</div>
+  </div>
+</div>

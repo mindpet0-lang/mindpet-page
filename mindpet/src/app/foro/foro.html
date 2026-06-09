@@ -1,0 +1,226 @@
+<div class="foro-container">
+    <div class="foro-wrapper">
+
+        <header class="profile-header">
+            <div class="account-container" (click)="onProfileClick()">
+                <img [src]="user?.fotoPerfil || '/assets/images/default-user.png'" class="profile-img">
+            </div>
+
+            <div class="user-menu" *ngIf="isMenuOpen">
+                <div class="user-info">
+                    <p class="user-name">{{ user?.nombre }}</p>
+                    <p class="user-email">{{ user?.correo }}</p>
+                </div>
+                <hr>
+
+                <button class="btn-settings" [routerLink]="['/perfil']">
+                    <span class="material-icons">settings</span>
+                    Ajustes
+                </button>
+
+                @if(user?.correo === "Inicia sesión") {
+                <button class="btn-login" [routerLink]="['/login']">
+                    <span class="material-icons">logout</span>
+                    Iniciar sesión
+                </button>
+                } @else {
+                <button class="btn-logout" (click)="onLogout()">
+                    <span class="material-icons">logout</span>
+                    Cerrar sesión
+                </button>
+                }
+            </div>
+        </header>
+
+        <button type="button" class="btn-volver" (click)="volverAtras()" title="volver a la pagina anterior">
+            ← Volver
+        </button>
+
+        <header class="foro-header">
+            <h2>🌸 Foro Comunitario 🌸</h2>
+            <p>Comparte tus ideas de forma libre y bonita</p>
+        </header>
+
+        <div class="card-publicar">
+            <textarea 
+                [(ngModel)]="nuevoContenido" 
+                placeholder="¿De qué te gustaría hablar hoy? Escribe aquí... 🍦"
+                rows="3"
+                [disabled]="guardando">
+            </textarea>
+            
+            <div *ngIf="previsualizacionUrl" class="wrapper-previsualizacion">
+                <img [src]="previsualizacionUrl" class="img-preview">
+                <button type="button" class="btn-quitar-img" (click)="limpiarImagen()">✕</button>
+            </div>
+
+            <div class="acciones-publicar">
+                <label class="btn-subir-archivo" title="Añadir imagen">
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+                    📷 Añadir foto
+                </label>
+
+<button type="button" 
+        class="btn-publicar" 
+        [disabled]="(!nuevoContenido.trim() && !imagenSeleccionada) || guardando" 
+        (mousedown)="publicar()">
+    
+    <i [ngClass]="guardando ? 'bi bi-send-fill' : 'bi bi-send'"></i>
+    
+    {{ guardando ? 'Publicando...' : 'Publicar entrada' }}
+
+</button>
+            </div>
+        </div>
+
+        <div class="divisor"></div>
+
+        <main class="lista-publicaciones">
+            <h3>Publicaciones recientes</h3>
+
+            <div *ngIf="publicaciones.length === 0" class="sin-publicaciones">
+                Aún no hay publicaciones... ¡Sé la primera persona en llenar este espacio de magia! 🍦
+            </div>
+
+            <div *ngFor="let pub of publicaciones" class="card-publicacion">
+
+                <div class="acciones-superiores"
+                    *ngIf="publicacionIdParaBorrar !== pub.id && publicacionIdParaEditar !== pub.id && pub.usuario.id === idUsuarioLogueado">
+                    <button type="button" class="btn-accion btn-editar-icono"
+                        (click)="activarEdicion(pub.contenido, pub.id!)" title="Editar">✏️</button>
+                    <button type="button" class="btn-accion btn-eliminar" (click)="solicitarEliminar(pub.id)"
+                        title="Eliminar">✕</button>
+                </div>
+
+                <div *ngIf="publicacionIdParaBorrar === pub.id" class="cartel-confirmacion">
+                    <span>¿Eliminar esta publicación?</span>
+                    <div class="confirmacion-acciones">
+                        <button type="button" class="btn-confirmar-si" (click)="confirmarEliminar()">Sí</button>
+                        <button type="button" class="btn-confirmar-no" (click)="cancelarEliminar()">No</button>
+                    </div>
+                </div>
+
+                <div class="avatar-autor-container">
+                    <img [src]="pub.usuario.fotoPerfil || '/assets/images/default-user.png'" class="avatar-autor-img">
+                </div>
+
+                <div class="contenido-publicacion">
+
+                    <div *ngIf="publicacionIdParaEditar !== pub.id">
+                        <p class="texto-pub">{{ obtenerTextoLimpio(pub.contenido) }}</p>
+                        
+                        <div *ngIf="obtenerImagenUrl(pub.contenido)" class="imagen-publicada-container">
+                            <img [src]="obtenerImagenUrl(pub.contenido)" class="imagen-publicada">
+                        </div>
+                    </div>
+
+                    <div *ngIf="publicacionIdParaEditar === pub.id" class="editor-interno">
+                        <textarea [(ngModel)]="contenidoEditado" rows="2" class="textarea-edicion"></textarea>
+                        
+                        <div *ngIf="pub.previsualizacionUrl" class="wrapper-previsualizacion" style="max-width: 130px; margin: 8px 0;">
+                            <img [src]="pub.previsualizacionUrl" class="img-preview" style="height: 90px; object-fit: cover;">
+                            <button type="button" class="btn-quitar-img" (click)="limpiarImagenComentario(pub)">✕</button>
+                        </div>
+
+                        <div class="confirmacion-acciones" style="margin-top: 8px; justify-content: flex-end; gap: 8px;">
+                            <label class="btn-subir-archivo" style="margin: 0; padding: 6px 12px; font-size: 12px; background-color: #f3effa; color: #555; cursor: pointer;" title="Cambiar imagen">
+                                <input type="file" (change)="onComentarioFileSelected($event, pub)" accept="image/*" style="display: none;">
+                                📷 Cambiar Foto
+                            </label>
+                            <button type="button" class="btn-confirmar-si" style="background-color: #b5ead7; color: #333;" (click)="guardarEdicion(pub)">Guardar</button>
+                            <button type="button" class="btn-confirmar-no" style="background-color: #ff9aa2; color: white;" (click)="cancelarEdicion()">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="meta-pub">
+                        <span class="autor">✨ Por: <strong>{{ pub.usuario.nombre || 'Usuario Anónimo' }}</strong></span>
+
+                        <div class="likes-container" (click)="darLike(pub)">
+                            <span class="corazon" [class.activo]="pub.leDioLike">
+                                {{ pub.leDioLike ? '❤️' : '🤍' }}
+                            </span>
+                            <span class="contador-likes">{{ pub.totalLikes || 0 }}</span>
+                        </div>
+
+                        <span class="fecha">{{ pub.fechaCreacion | date:'medium' }}</span>
+                    </div>
+
+                    <div class="seccion-comentarios">
+                        
+                        <div class="lista-comentarios" *ngIf="pub.comentarios && pub.comentarios.length > 0">
+                            <div class="item-comentario" *ngFor="let com of pub.comentarios">
+                                <img [src]="com.usuario.fotoPerfil || '/assets/images/default-user.png'" class="avatar-comentario">
+                                
+                                <div class="cuerpo-comentario">
+                                    <div class="globo-comentario" *ngIf="!com.editando">
+                                        <button *ngIf="com.usuario.id === idUsuarioLogueado" type="button" class="btn-editar-com-mini" (click)="activarEdicionComentario(com)">✏️</button>
+                                        <span class="nombre-comentario"><strong>{{ com.usuario.nombre }}</strong></span>
+                                        <p class="texto-comentario">{{ obtenerTextoLimpio(com.contenido) }}</p>
+                                        
+                                        <div *ngIf="obtenerImagenUrl(com.contenido)" class="imagen-comentario-container">
+                                            <img [src]="obtenerImagenUrl(com.contenido)" class="imagen-comentario-render">
+                                        </div>
+                                    </div>
+
+                                    <div class="globo-comentario editor-comentario-box" *ngIf="com.editando">
+                                        <input type="text" [(ngModel)]="com.contenidoEditado" class="input-comentario-edit">
+                                        
+                                        <div *ngIf="com.previsualizacionUrl" class="wrapper-prev-comentario">
+                                            <img [src]="com.previsualizacionUrl" class="img-preview-com" style="max-height: 80px; object-fit: cover; border-radius: 4px;">
+                                            <button type="button" class="btn-quitar-img-com" (click)="limpiarImagenComentario(com)">✕</button>
+                                        </div>
+
+                                        <div class="acciones-edit-com">
+                                            <label class="btn-subir-foto-com-mini" style="cursor: pointer;">
+                                                <input type="file" (change)="onComentarioFileSelected($event, com)" accept="image/*" style="display: none;">
+                                                📷 Cambiar Foto
+                                            </label>
+                                            <button class="btn-save-com-mini" (click)="guardarEdicionComentario(com)">Ok</button>
+                                            <button class="btn-cancel-com-mini" (click)="cancelarEdicionComentario(com)">No</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="meta-comentario" *ngIf="!com.editando">
+                                        <span class="fecha-comentario">{{ com.fechaCreacion | date:'shortTime' }}</span>
+                                        <span class="like-comentario-btn" (click)="darLikeComentario(com)">
+                                            {{ com.leDioLike ? '❤️' : '🤍' }} {{ com.totalLikes || 0 }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-comentario-container">
+                            <div class="input-com-wrapper-inputs" style="display: flex; flex-direction: column; flex-grow: 1; gap: 4px;">
+                                <input 
+                                    type="text" 
+                                    [(ngModel)]="pub.nuevoComentarioTexto" 
+                                    placeholder="Escribe una respuesta bonita... 🍦"
+                                    (keyup.enter)="agregarComentario(pub)"
+                                    class="input-comentario">
+                                
+                                <div *ngIf="pub.comentarioPreviewUrl" class="wrapper-prev-comentario" style="margin-top: 4px;">
+                                    <img [src]="pub.comentarioPreviewUrl" class="img-preview-com" style="max-height: 60px; border-radius: 4px;">
+                                    <button type="button" class="btn-quitar-img-com" (click)="limpiarImagenComentario(pub, true)">✕</button>
+                                </div>
+                            </div>
+
+                            <label class="btn-foto-comentario-trigger" title="Añadir foto a la respuesta" style="cursor: pointer; margin-left: 6px;">
+                                <input type="file" (change)="onComentarioFileSelected($event, pub, true)" accept="image/*" style="display: none;">
+                                📷
+                            </label>
+
+                            <button type="button" 
+        class="btn-enviar-comentario" 
+        (click)="agregarComentario(pub)">
+    <i class="bi bi-send"></i>
+</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>
